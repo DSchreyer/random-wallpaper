@@ -6,6 +6,6 @@ Downloads first top|hot|rising|new|controversial wallpaper from the subreddit wa
 
 ### Usage
 ``` bash
-get_reddit_wallpaper.py --option <argument> ...
+get_reddit_wallpaper.py --option <argument>
 get_reddit_wallpaper.py --directory [--category] [--change_wallpaper]
 ```
