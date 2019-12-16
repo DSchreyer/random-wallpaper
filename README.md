@@ -7,7 +7,8 @@ Downloads first top|hot|rising|new|controversial wallpaper from the subreddit wa
 ### Usage
 ``` bash
 Usage: get_reddit_wallpaper.py --option <argument>
-
+```
+``` bash
 get_reddit_wallpaper.py --directory <Path-to-directory> [--category <(cat1|cat1,cat2,..)>] [--change_wallpaper <("True"|"False")>]
 ```
 
