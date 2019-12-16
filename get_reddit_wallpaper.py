@@ -9,15 +9,22 @@ import argparse
 
 # Parse arguments into script
 parser = argparse.ArgumentParser(description="Get Wallpaper from subreddit wallpaper.")
-parser.add_argument( "--category", help = "Category: [hot | top | new | controversial | rising]")
-parser.add_argument( "--dir_name", help = "Path to directory in which images should be stored")
-parser.add_argument( "--change_wallpaper", default= "True", help = "Change Wallpaper? ['True' | 'False']")
+parser.add_argument( "--category",
+                     type=str,
+                     default = "top",
+                     help = "Category: [hot | top | new | controversial | rising]")
+parser.add_argument( "--directory",
+                     default="./",
+                     help = "Path to directory in which images should be stored")
+parser.add_argument( "--change_wallpaper",
+                     default= "True",
+                     help = "Change Wallpaper? ['True' | 'False']")
 args = parser.parse_args()
 
 subreddit = "https://www.reddit.com/r/wallpapers"
 
 headers = {'User-Agent': 'Mozilla/5.0'}
-dir_name = args.dir_name
+directory = args.directory
 
 class get_wallpaper():
     def __init__(self, url):
@@ -57,11 +64,11 @@ for cat in args.category.strip().split(","):
 
     post.get_href(link)
     post.get_image(post.href)
-    post.download_image(post.title, post.img_href, dir_name)
+    post.download_image(post.title, post.img_href, directory)
     full_name = "file://%s" % (post.path)
     # create dir if it does not exist
-    if not os.path.exists(dir_name):
-        os.mkdir(dir_name)
+    if not os.path.exists(directory):
+        os.mkdir(directory)
 
     # download image
     if not os.path.exists(post.path):
