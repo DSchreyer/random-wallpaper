@@ -6,6 +6,10 @@ Downloads first top|hot|rising|new|controversial wallpaper from the subreddit wa
 
 ### Usage
 ``` bash
-get_reddit_wallpaper.py --option <argument>
-get_reddit_wallpaper.py --directory [--category] [--change_wallpaper]
+Usage: get_reddit_wallpaper.py --option <argument>
+
+get_reddit_wallpaper.py --directory <Path-to-directory> [--category <(cat1|cat1,cat2,..)>] [--change_wallpaper <("True"|"False")>]
 ```
+
+category: Sorting category on reddit. Defaul: "top". Optional: "hot", "rising", "new", "top", "controversial".
+          Multiple categories are also possible: e.g. top,hot,rising
