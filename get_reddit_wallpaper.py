@@ -14,17 +14,19 @@ parser.add_argument( "--category",
                      default = "top",
                      help = "Category: [hot | top | new | controversial | rising]")
 parser.add_argument( "--directory",
-                     default="./",
                      help = "Path to directory in which images should be stored")
 parser.add_argument( "--change_wallpaper",
                      default= "True",
                      help = "Change Wallpaper? ['True' | 'False']")
 args = parser.parse_args()
-
 subreddit = "https://www.reddit.com/r/wallpapers"
 
 headers = {'User-Agent': 'Mozilla/5.0'}
-directory = args.directory
+
+if args.directory is not None:
+    directory = args.directory
+else:
+    directory = os.popen("pwd").read().strip()
 
 class get_wallpaper():
     def __init__(self, url):
