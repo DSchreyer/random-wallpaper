@@ -27,7 +27,7 @@ subreddit = "https://www.reddit.com/r/%s" % (args.subreddit)
 headers = {'User-Agent': 'Mozilla/5.0'}
 
 if args.directory is not None:
-    directory = args.directory
+    directory = os.path.abspath(.args.directory)
 else:
     directory = os.popen("pwd").read().strip()
 

@@ -12,10 +12,10 @@ parser.add_argument( "--interval", default= 0,
 parser.add_argument( "--directory", help = "Path to directory")
 args = parser.parse_args()
 
-if args.dir is None:
-    directory = os.popen("pwd").read().strip()
+if args.dir is not None:
+    directory = aos.path.abspath(args.directory)
 else:
-    directory = args.dir
+    directory = os.popen("pwd").read().strip()
   
 def change_wallpaper(dir):
     dir_files  = os.listdir(dir)
