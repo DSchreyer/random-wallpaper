@@ -18,8 +18,11 @@ parser.add_argument( "--directory",
 parser.add_argument( "--change_wallpaper",
                      default= "True",
                      help = "Change Wallpaper? ['True' | 'False']")
+parser.add_argument( "--subreddit",
+                     default= "wallpapers",
+                     help = "Subreddit to download top image from")
 args = parser.parse_args()
-subreddit = "https://www.reddit.com/r/wallpapers"
+subreddit = "https://www.reddit.com/r/%s" % (args.subreddit)
 
 headers = {'User-Agent': 'Mozilla/5.0'}
 
@@ -62,6 +65,7 @@ class get_wallpaper():
 
 for cat in args.category.strip().split(","):
     link = "%s/%s/" % (subreddit, cat)
+    print("Download image from: %s" % (link))
     post = get_wallpaper(link)
 
     post.get_href(link)
