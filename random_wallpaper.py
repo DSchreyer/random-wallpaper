@@ -13,7 +13,7 @@ parser.add_argument( "--directory", help = "Path to directory")
 args = parser.parse_args()
 
 if args.dir is not None:
-    directory = aos.path.abspath(args.directory)
+    directory = os.path.abspath(args.directory)
 else:
     directory = os.popen("pwd").read().strip()
   
