@@ -3,3 +3,7 @@ change_wallpaper_old.py
 get_reddit_wallpaper_test.ipynb
 venv
 wallpapers
+build
+get_reddit_wallpaper.spec
+__pycache__
+random_wallpaper.spec
