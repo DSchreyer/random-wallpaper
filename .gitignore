@@ -3,6 +3,15 @@ change_wallpaper_old.py
 get_reddit_wallpaper_test.ipynb
 venv
 wallpapers
+<<<<<<< HEAD
 get_reddit_wallpaper.spec
 __pycache__
 random_wallpaper.spec
+=======
+build
+get_reddit_wallpaper.spec
+__pycache__
+random_wallpaper.spec
+drwxrwxr-x  4 daniel daniel 4096 Dec 24 15:42 .idea
+drwxr-xr-x  2 daniel daniel 4096 Dec 15 13:56 .ipynb_checkpoints
+>>>>>>> dev
