@@ -55,8 +55,8 @@ class get_wallpaper():
         # find image url
         img_a = next_content.find("div", {"class": "media-preview-content"}).find("a")
         self.img_href = img_a.attrs["href"]
-        self.title = next_content.find("a", {"class": "title"}).text.replace("/", "_").replace("?", "_").replace('"',
-                                                                                                                 "_")
+        title = next_content.find("a", {"class": "title"}).text
+        self.title = title.replace("/", "_").replace("?", "_").replace('"',"_").replace("*", "_").replace("\\","_").replace("<", "_").replace(">", "_").replace("|", "_").replace(":","_")
     def download_image(self, title, img_href, pwd):
         format_img = re.search("^.*(\..*)$", img_href).group(1)
         title = (title + format_img)
