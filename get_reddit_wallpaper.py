@@ -8,6 +8,7 @@ import os
 import argparse
 from sys import platform
 import ctypes
+from appscript import app, mactypes
 
 
 # Parse arguments into script
@@ -93,6 +94,7 @@ for cat in args.category.strip().split(","):
             print("Changed wallpaper to: %s" % (post.path))
     elif platform == "darwin":
         print("Change wallpaper in OS X")
+        app('Finder').desktop_picture.set(mactypes.File(post.path))
         print("Changed wallpaper to: %s" % (post.path))
     elif platform == "win32":
         print("Change wallpaper in Windows")
