@@ -6,6 +6,9 @@ import requests
 import re
 import os
 import argparse
+from sys import platform
+import ctypes
+
 
 # Parse arguments into script
 parser = argparse.ArgumentParser(description="Get Wallpaper from subreddit wallpaper.")
@@ -56,7 +59,7 @@ class get_wallpaper():
         img_a = next_content.find("div", {"class": "media-preview-content"}).find("a")
         self.img_href = img_a.attrs["href"]
         title = next_content.find("a", {"class": "title"}).text
-        self.title = title.replace("/", "_").replace("?", "_").replace('"',"_").replace("*", "_").replace("\\","_").replace("<", "_").replace(">", "_").replace("|", "_").replace(":","_")
+        self.title = title.replace("/", "_").replace("?", "_").replace('"',"_").replace("*", "_").replace("\\","_").replace("<", "_").replace(">", "_").replace("|", "_").replace(":","_").replace("'","")
     def download_image(self, title, img_href, pwd):
         format_img = re.search("^.*(\..*)$", img_href).group(1)
         title = (title + format_img)
@@ -83,7 +86,22 @@ for cat in args.category.strip().split(","):
         f.close()
 
     # change wallpaper to downloaded image
-    if args.change_wallpaper == "True":
-        os.system("gsettings set org.gnome.desktop.background picture-uri '%s'" % (full_name))
+    if platform == "linux" or platform == "linux2":
+        if args.change_wallpaper == "True":
+            os.system("gsettings set org.gnome.desktop.background picture-uri '%s'" % (full_name))
+            print("Change wallpaper in Unix os")
+            print("Changed wallpaper to: %s" % (post.path))
+    elif platform == "darwin":
+        print("Change wallpaper in OS X")
         print("Changed wallpaper to: %s" % (post.path))
+    elif platform == "win32":
+        print("Change wallpaper in Windows")
+        normpath = os.path.normpath(post.path)
+        SPI_SETDESKWALLPAPER = 20
+        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, normpath, 0)
+        print("Changed wallpaper to: %s" % (normpath))
+    else:
+        print("Operating system is not recognized")
+        print("Does not change the wallpaper")
+
 
