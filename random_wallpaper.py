@@ -1,37 +1,45 @@
 #!/usr/bin/env python
+"""
+Randomly changes the background to an image file in a given directory.
+
+Supports continues wallpaper change every x minutes.
+"""
 # coding: utf-8
 import os
 import argparse
 from time import sleep
-from random import randint, choice
+from random import choice
 import re
 
-parser = argparse.ArgumentParser(description="Random Wallpaper Generator.")
-parser.add_argument( "--interval", default= 0,
-                     type = int, help = "Time interval in minutes")
-parser.add_argument( "--directory", help = "Path to directory")
-args = parser.parse_args()
+PARSER = argparse.ArgumentParser(description="Random Wallpaper Generator.")
+PARSER.add_argument("--interval", default=0,
+                    type=int, help="Time interval in minutes")
+PARSER.add_argument("--directory", help="Path to directory")
+ARGS = PARSER.parse_args()
 
-if args.directory is not None:
-    directory = os.path.abspath(args.directory)
+if ARGS.directory is not None:
+    DIRECTORY = os.path.abspath(ARGS.directory)
 else:
-    directory = os.popen("pwd").read().strip()
-  
-def change_wallpaper(dir):
-    dir_files  = os.listdir(dir)
+    DIRECTORY = os.popen("pwd").read().strip()
+
+def change_wallpaper(d):
+    """
+    Changes the background to a random image in a directory.
+    """
+    dir_files = os.listdir(d)
     image_format = re.compile(".*png|.*jpg|.*jpeg|.*tiff")
     images = list(filter(image_format.match, dir_files))
-    if len(images) == 0:
-        print("Error! No images with the format .png, .jpg, or .jpeg in the directory: %s" % (dir))
+    if not images:
+        print("Error! No images with the format .png, .jpg, or .jpeg in the directory: %s" % (d))
         quit()
     rand_img = choice(images)
-    rand_file = "%s/%s" % (dir, rand_img)
+    rand_file = "%s/%s" % (d, rand_img)
     os.system("gsettings set org.gnome.desktop.background picture-uri 'file://%s'" % (rand_file))
     print("Changed Wallpaper to: %s" % (rand_file))
 
-if args.interval == 0:
-    change_wallpaper(directory)
-elif args.interval > 0:
-    while (True):
-        change_wallpaper(directory)
-        sleep(args.interval*60)
+if ARGS.interval == 0:
+    change_wallpaper(DIRECTORY)
+elif ARGS.interval > 0:
+    while True:
+        change_wallpaper(DIRECTORY)
+        sleep(ARGS.interval*60)
