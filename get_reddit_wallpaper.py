@@ -44,11 +44,11 @@ class GetWallpaper():
     """
     def __init__(self, url):
         self.url = url
-        self.href = ""
-        self.src = ""
-        self.title = ""
-        self.img_href = ""
-        self.path = ""
+        self.href = None
+        self.src = None
+        self.title = None
+        self.img_href = None
+        self.path = None
 
     def get_href(self, page_link):
         """
