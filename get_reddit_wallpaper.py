@@ -103,7 +103,6 @@ for cat in args.category.strip().split(","):
     post.get_href(link)
     post.get_image(post.href)
     post.download_image(post.title, post.img_href, directory)
-    full_name = "file://%s" % (post.path)
     # create dir if it does not exist
     if not os.path.exists(directory):
         os.mkdir(directory)
@@ -117,7 +116,8 @@ for cat in args.category.strip().split(","):
     # change wallpaper to downloaded image
     if platform in ("linux", "linux2"):
         if args.change_wallpaper == "True":
-            os.system("gsettings set org.gnome.desktop.background picture-uri '%s'" % (full_name))
+            print(post.path)
+            os.system("feh --bg-scale '%s'" % (post.path))
             print("Change wallpaper in Unix os")
             print("Changed wallpaper to: %s" % (post.path))
     # elif platform == "darwin":

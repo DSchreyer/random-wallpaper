@@ -34,7 +34,7 @@ def change_wallpaper(d):
         quit()
     rand_img = choice(images)
     rand_file = "%s/%s" % (d, rand_img)
-    os.system("gsettings set org.gnome.desktop.background picture-uri 'file://%s'" % (rand_file))
+    os.system("feh --bg-scale '%s'" % (rand_file))
     print("Changed Wallpaper to: %s" % (rand_file))
 
 if ARGS.interval == 0:
